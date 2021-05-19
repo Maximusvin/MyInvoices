@@ -8,6 +8,7 @@ export const Header = styled.header`
   padding-left: 20px;
   color: rgba(128, 128, 128, 1);
   border-left: 4px solid rgba(128, 128, 128, 0.4);
+  margin-bottom: 30px;
 
   ::before {
     display: block;
