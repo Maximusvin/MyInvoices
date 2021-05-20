@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/MyInvoices/static/css/main.485071c1.chunk.css",
-    "main.js": "/MyInvoices/static/js/main.c0c2ccbd.chunk.js",
-    "main.js.map": "/MyInvoices/static/js/main.c0c2ccbd.chunk.js.map",
+    "main.css": "/MyInvoices/static/css/main.e34457de.chunk.css",
+    "main.js": "/MyInvoices/static/js/main.bcca620e.chunk.js",
+    "main.js.map": "/MyInvoices/static/js/main.bcca620e.chunk.js.map",
     "runtime-main.js": "/MyInvoices/static/js/runtime-main.a249ca57.js",
     "runtime-main.js.map": "/MyInvoices/static/js/runtime-main.a249ca57.js.map",
-    "static/js/2.b0ddaad2.chunk.js": "/MyInvoices/static/js/2.b0ddaad2.chunk.js",
-    "static/js/2.b0ddaad2.chunk.js.map": "/MyInvoices/static/js/2.b0ddaad2.chunk.js.map",
+    "static/js/2.9a5a93ac.chunk.js": "/MyInvoices/static/js/2.9a5a93ac.chunk.js",
+    "static/js/2.9a5a93ac.chunk.js.map": "/MyInvoices/static/js/2.9a5a93ac.chunk.js.map",
     "index.html": "/MyInvoices/index.html",
-    "static/css/main.485071c1.chunk.css.map": "/MyInvoices/static/css/main.485071c1.chunk.css.map",
-    "static/js/2.b0ddaad2.chunk.js.LICENSE.txt": "/MyInvoices/static/js/2.b0ddaad2.chunk.js.LICENSE.txt",
+    "static/css/main.e34457de.chunk.css.map": "/MyInvoices/static/css/main.e34457de.chunk.css.map",
+    "static/js/2.9a5a93ac.chunk.js.LICENSE.txt": "/MyInvoices/static/js/2.9a5a93ac.chunk.js.LICENSE.txt",
     "static/media/index.css": "/MyInvoices/static/media/montserrat-v15-latin_cyrillic-regular.f263cfd0.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.a249ca57.js",
-    "static/js/2.b0ddaad2.chunk.js",
-    "static/css/main.485071c1.chunk.css",
-    "static/js/main.c0c2ccbd.chunk.js"
+    "static/js/2.9a5a93ac.chunk.js",
+    "static/css/main.e34457de.chunk.css",
+    "static/js/main.bcca620e.chunk.js"
   ]
 }
