@@ -15,8 +15,8 @@ const Table = ({ invoices }) => {
 
       <tbody>
         {invoices.map(
-          ({ _id, number, date_created, date_supplied, comment }) => (
-            <Tr key={_id}>
+          ({ _id, id, number, date_created, date_supplied, comment }) => (
+            <Tr key={_id || id}>
               <Td>{date_created}</Td>
               <Td isActive={true}>INV-{number}</Td>
               <Td>{date_supplied}</Td>

@@ -1,23 +1,15 @@
-import { AppBar } from 'components';
-import { SectionWrap } from 'UI/SectionWrap';
-import { useDispatch } from 'react-redux';
+import { AppBar, InvoicesForm } from 'components';
 
-import { InvoicesWrap, Button } from './CreateInvoices.style';
+import { SectionWrap } from 'UI/SectionWrap';
+import { InvoicesWrap } from './CreateInvoices.style';
 
 const CreateInvoices = () => {
-  const dispatch = useDispatch();
-
-  const handleSubmit = () => {
-    console.log('save');
-  };
-
   return (
     <InvoicesWrap>
       <AppBar>Create Invoice</AppBar>
 
       <SectionWrap>
-        sd
-        <Button onClick={handleSubmit}>Save</Button>
+        <InvoicesForm />
       </SectionWrap>
     </InvoicesWrap>
   );
