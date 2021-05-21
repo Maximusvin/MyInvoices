@@ -24,7 +24,11 @@ const validationSchema = yup.object().shape({
     .positive(),
   invoiceDate: yup.string().required('Required'),
   supplyDate: yup.string().required('Required'),
-  comment: yup.string().required('Required'),
+  comment: yup
+    .string()
+    .required('Required')
+    .min(3, 'Minimum 3 characters')
+    .max(160, 'Maximum 160 characters'),
 });
 
 function CustomInput({ field, placeholder, type }) {
