@@ -4,8 +4,8 @@ export const fetchInvoicesRequest = createAction(
   'invoices/fetchInvoicesRequest',
 );
 
-export const fetchEInvoicesSuccess = createAction(
-  'invoices/fetchEInvoicesSuccess',
+export const fetchInvoicesSuccess = createAction(
+  'invoices/fetchInvoicesSuccess',
 );
 
 export const fetchInvoicesError = createAction('invoices/fetchInvoicesError');

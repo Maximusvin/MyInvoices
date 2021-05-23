@@ -1,6 +1,7 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import invoicesReducer from './invoices/invoicesReducer';
+import editInvoiceReducer from './editInvoice/editInvoiceReducer';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -10,7 +11,10 @@ const middleware = [
 ];
 
 export const store = configureStore({
-  reducer: { invoices: invoicesReducer },
+  reducer: {
+    invoices: invoicesReducer,
+    editInvoice: editInvoiceReducer,
+  },
   devTools: process.env.NODE_ENV === 'development',
   middleware,
 });

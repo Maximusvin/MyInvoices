@@ -1,9 +1,23 @@
 import PropTypes from 'prop-types';
-import { TableWrap, Thead, Tr, Th, Td, Tbody, IconButton } from './Table.style';
 import { FaEdit } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
+import {
+  TableWrap,
+  Thead,
+  Tr,
+  Th,
+  Td,
+  Tbody,
+  IconButton,
+  IconRoute,
+} from './Table.style';
+import { deleteInvoice } from 'services/invoices-api';
 
 const Table = ({ invoices }) => {
+  const handleDelete = id => {
+    deleteInvoice(id);
+  };
+
   return (
     <TableWrap>
       <Thead>
@@ -25,10 +39,10 @@ const Table = ({ invoices }) => {
               <Td>{date_supplied}</Td>
               <Td>{comment}</Td>
               <Td>
-                <IconButton>
+                <IconRoute to={`/edit-invoice/${_id || id}`}>
                   <FaEdit />
-                </IconButton>
-                <IconButton>
+                </IconRoute>
+                <IconButton onClick={() => handleDelete(_id || id)}>
                   <MdDelete />
                 </IconButton>
               </Td>

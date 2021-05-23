@@ -1,7 +1,7 @@
 import * as invoicesAPI from 'services/invoices-api';
 import {
   fetchInvoicesRequest,
-  fetchEInvoicesSuccess,
+  fetchInvoicesSuccess,
   fetchInvoicesError,
 } from './invoicesActions';
 
@@ -10,7 +10,7 @@ export const fetchInvoices = () => async dispatch => {
 
   try {
     const invoices = await invoicesAPI.fetchInvoices();
-    dispatch(fetchEInvoicesSuccess(invoices));
+    dispatch(fetchInvoicesSuccess(invoices));
   } catch (error) {
     dispatch(fetchInvoicesError(error));
   }

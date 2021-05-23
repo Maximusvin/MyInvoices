@@ -7,17 +7,27 @@ export async function fetchInvoices() {
   return data;
 }
 
+export async function fetchInvoiceById(id) {
+  const { data } = await axios.get(`/invoices/${id}`);
+  return data;
+}
+
 export async function createInvoice(invoice) {
   await axios.post(`/invoices`, invoice);
 }
 
-// export async function createInvoice(invoice) {
-//   const options = {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(invoice),
-//   };
-//   return await fetch(`http://localhost:4030/invoices`, options).then(res =>
-//     res.json(),
-//   );
-// }
+export async function deleteInvoice(id) {
+  await axios({
+    method: 'DELETE',
+    url: `http://localhost:4030/invoices/${id}`,
+  });
+}
+
+export async function editInvoice(id, invoice) {
+  await axios.patch(`/invoices/${id}`, invoice);
+
+  // await axios({
+  //   method: 'PATCH',
+  //   url: `http://localhost:4030/invoices/${id}`,
+  // });
+}

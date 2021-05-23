@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const TableWrap = styled.table`
   width: 100%;
@@ -61,6 +62,22 @@ export const Td = styled.td`
 `;
 
 export const IconButton = styled.button`
+  cursor: pointer;
+  background: transparent;
+  font-size: 16px;
+  color: rgba(128, 128, 128, 1);
+  transition: color 0.2s linear;
+
+  :not(:last-child) {
+    margin-right: 5px;
+  }
+
+  :hover {
+    color: #000;
+  }
+`;
+
+export const IconRoute = styled(Link)`
   cursor: pointer;
   background: transparent;
   font-size: 16px;

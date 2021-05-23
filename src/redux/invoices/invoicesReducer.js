@@ -1,17 +1,17 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
 import {
   fetchInvoicesRequest,
-  fetchEInvoicesSuccess,
+  fetchInvoicesSuccess,
   fetchInvoicesError,
 } from './invoicesActions';
 
 const entities = createReducer([], {
-  [fetchEInvoicesSuccess]: (_, { payload }) => payload,
+  [fetchInvoicesSuccess]: (_, { payload }) => payload,
 });
 
 const isLoading = createReducer(false, {
   [fetchInvoicesRequest]: () => true,
-  [fetchEInvoicesSuccess]: () => false,
+  [fetchInvoicesSuccess]: () => false,
   [fetchInvoicesError]: () => false,
 });
 

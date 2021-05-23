@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FormWrap = styled.div`
+export const FormWrap = styled.form`
   padding: 35px 25px;
   border: 1px solid rgba(128, 128, 128, 0.4);
   margin-bottom: 30px;

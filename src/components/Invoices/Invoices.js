@@ -22,9 +22,11 @@ const Invoices = () => {
         <Button to="/create-invoice">Add new</Button>
       </SectionWrap>
 
-      <SectionWrap title={'Invoices'}>
-        <Table invoices={invoices} />
-      </SectionWrap>
+      {invoices && (
+        <SectionWrap title={'Invoices'}>
+          <Table invoices={invoices} />
+        </SectionWrap>
+      )}
     </InvoicesWrap>
   );
 };

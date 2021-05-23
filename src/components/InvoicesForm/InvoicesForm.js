@@ -1,7 +1,8 @@
-import { Field, Form, Formik, ErrorMessage } from 'formik';
-import * as yup from 'yup';
+import { useState } from 'react';
 import { useLocation, useHistory } from 'react-router';
-import { createInvoice } from 'services/invoices-api';
+import PropTypes from 'prop-types';
+import { createInvoice, editInvoice } from 'services/invoices-api';
+import { getFormatDate } from 'functions/getFormatDate';
 import {
   FormWrap,
   Input,
@@ -11,123 +12,125 @@ import {
   Textarea,
 } from './InvoicesForm.style';
 
-const validationSchema = yup.object().shape({
-  inv: yup
-    .number()
-    .required()
-    .test(
-      3,
-      'Minimum 3 and maximum 10 characters',
-      val => val && val.toString().length >= 3 && val.toString().length <= 10,
-    )
-    .integer()
-    .positive(),
-  invoiceDate: yup.string().required('Required'),
-  supplyDate: yup.string().required('Required'),
-  comment: yup
-    .string()
-    .required('Required')
-    .min(3, 'Minimum 3 characters')
-    .max(160, 'Maximum 160 characters'),
-});
+const InputFieldName = {
+  INV: 'inv',
+  INV_DATE: 'invoiceDate',
+  SUPPLY_DATE: 'supplyDate',
+  COMMENT: 'comment',
+};
 
-function CustomInput({ field, placeholder, type }) {
-  return (
-    <>
-      <Input {...field} type={type} placeholder={placeholder} />
-      <ErrorMessage name={field.name} component="span" />
-    </>
-  );
-}
-
-function CustomTextarea({ field, placeholder }) {
-  return (
-    <>
-      <Textarea {...field} placeholder={placeholder} />
-      <ErrorMessage name={field.name} component="span" />
-    </>
-  );
-}
-
-const InvoicesForm = () => {
+const InvoicesForm = ({ invoice }) => {
   const location = useLocation();
   const history = useHistory();
+
+  const [number, setNumber] = useState(invoice ? invoice.number : '');
+  const [invoiceDate, setInvoiceDate] = useState(
+    invoice ? getFormatDate(invoice.date_created) : '',
+  );
+  const [supplyDate, setSupplyDate] = useState(
+    invoice ? getFormatDate(invoice.date_supplied) : '',
+  );
+  const [comment, setComment] = useState(invoice ? invoice.comment : '');
 
   const onGoMainPage = () => {
     history.push((location.pathname = '/'));
   };
 
-  const handleSubmit = ({ inv, invoiceDate, supplyDate, comment }) => {
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+
+    switch (true) {
+      case name === InputFieldName.INV:
+        setNumber(value);
+        break;
+      case name === InputFieldName.INV_DATE:
+        setInvoiceDate(value);
+        break;
+      case name === InputFieldName.SUPPLY_DATE:
+        setSupplyDate(value);
+        break;
+      case name === InputFieldName.COMMENT:
+        setComment(value);
+        break;
+      default:
+        return;
+    }
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
     const INV = {
-      number: inv,
+      number: number,
       date_created: invoiceDate,
       date_supplied: supplyDate,
-      comment,
+      comment: comment,
     };
 
-    createInvoice(INV);
+    if (invoice) {
+      editInvoice(invoice.id, INV);
+    } else {
+      createInvoice(INV);
+    }
+
     onGoMainPage();
   };
 
   return (
-    <Formik
-      initialValues={{
-        inv: '',
-        invoiceDate: '',
-        supplyDate: '',
-        comment: '',
-      }}
-      validationSchema={validationSchema}
-      onSubmit={(values, actions) => {
-        handleSubmit(values);
+    <FormWrap onSubmit={handleSubmit}>
+      <InputWrap>
+        <Label>
+          Number:
+          <Input
+            name={InputFieldName.INV}
+            type="number"
+            value={number}
+            onChange={handleInputChange}
+            placeholder="Enter the number"
+          />
+        </Label>
 
-        actions.setSubmitting(false);
-        actions.resetForm({});
-      }}
-    >
-      <Form>
-        <FormWrap>
-          <InputWrap>
-            <Label>
-              Number:
-              <Field
-                name="inv"
-                type="number"
-                placeholder="Enter the number"
-                component={CustomInput}
-              />
-            </Label>
+        <Label>
+          Invoice Date:
+          <Input
+            name={InputFieldName.INV_DATE}
+            type="date"
+            value={invoiceDate}
+            placeholder="Select date"
+            onChange={handleInputChange}
+          />
+        </Label>
 
-            <Label>
-              Invoice Date:
-              <Field
-                name="invoiceDate"
-                type="date"
-                placeholder="Select date"
-                component={CustomInput}
-              />
-            </Label>
-
-            <Label>
-              Supply Date:
-              <Field
-                name="supplyDate"
-                type="date"
-                placeholder="Select date"
-                component={CustomInput}
-              />
-            </Label>
-          </InputWrap>
-          <Label>
-            Comment:
-            <Field name="comment" component={CustomTextarea} />
-          </Label>
-        </FormWrap>
-
-        <Button type="submit">Save</Button>
-      </Form>
-    </Formik>
+        <Label>
+          Supply Date:
+          <Input
+            name={InputFieldName.SUPPLY_DATE}
+            type="date"
+            value={supplyDate}
+            placeholder="Select date"
+            onChange={handleInputChange}
+          />
+        </Label>
+      </InputWrap>
+      <Label>
+        Comment:
+        <Textarea
+          name={InputFieldName.COMMENT}
+          value={comment}
+          onChange={handleInputChange}
+        />
+      </Label>
+      <Button type="submit">Save</Button>
+    </FormWrap>
   );
+};
+
+InvoicesForm.defaultProps = {
+  invoice: null,
+};
+
+InvoicesForm.propTypes = {
+  invoice: PropTypes.object,
 };
 
 export default InvoicesForm;
