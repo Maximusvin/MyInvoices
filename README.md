@@ -1,7 +1,7 @@
 # Приложение "MyInvoices"
 
 - Работает по ссылке:
-  [maximusvin.github.io/myinvoices/](maximusvin.github.io/myinvoices/)
+  [https://maximusvin.github.io/MyInvoices/](https://maximusvin.github.io/MyInvoices/)
 - Сервер работает на хосте:
   [http://localhost:4030/invoices/](http://localhost:4030/invoices/)
   - Запуск сервера через команду `npm run server`
