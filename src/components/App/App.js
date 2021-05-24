@@ -11,9 +11,9 @@ function App() {
   return (
     <Layout>
       <Switch>
-        <Route path="/" exact component={Invoices} />
-        <Route path="/create-invoice" component={CreateInvoices} />
-        <Route path="/edit-invoice/:id" component={EditInvoice} />
+        <Route path="/MyInvoices/" exact component={Invoices} />
+        <Route path="/MyInvoices/create-invoice" component={CreateInvoices} />
+        <Route path="/MyInvoices/edit-invoice/:id" component={EditInvoice} />
         <Route component={NotFoundPage} />
       </Switch>
     </Layout>

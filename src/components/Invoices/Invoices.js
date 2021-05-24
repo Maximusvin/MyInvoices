@@ -19,7 +19,7 @@ const Invoices = () => {
       <AppBar>Invoices</AppBar>
 
       <SectionWrap title={'Actions'}>
-        <Button to="/create-invoice">Add new</Button>
+        <Button to="/MyInvoices/create-invoice">Add new</Button>
       </SectionWrap>
 
       {invoices && (

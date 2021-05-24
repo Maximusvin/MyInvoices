@@ -35,7 +35,7 @@ const InvoicesForm = ({ invoice }) => {
   const [comment, setComment] = useState(invoice ? invoice.comment : '');
 
   const onGoMainPage = () => {
-    history.push((location.pathname = '/'));
+    history.push((location.pathname = '/MyInvoices/'));
   };
 
   const handleInputChange = event => {

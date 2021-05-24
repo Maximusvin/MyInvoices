@@ -8,7 +8,7 @@ const NotFoundPage = () => {
   const history = useHistory();
 
   const onGoMainPage = () => {
-    history.push((location.pathname = '/'));
+    history.push((location.pathname = '/MyInvoices/'));
   };
 
   return (

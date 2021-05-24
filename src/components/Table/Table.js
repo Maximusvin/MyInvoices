@@ -39,7 +39,7 @@ const Table = ({ invoices }) => {
               <Td>{date_supplied}</Td>
               <Td>{comment}</Td>
               <Td>
-                <IconRoute to={`/edit-invoice/${_id || id}`}>
+                <IconRoute to={`/MyInvoices/edit-invoice/${_id || id}`}>
                   <FaEdit />
                 </IconRoute>
                 <IconButton onClick={() => handleDelete(_id || id)}>
