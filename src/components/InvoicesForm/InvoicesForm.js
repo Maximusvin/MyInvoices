@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import { createInvoice, editInvoice } from 'services/invoices-api';
 import { getFormatDate } from 'functions/getFormatDate';
 import {
-  FormWrap,
+  Form,
   Input,
   Label,
   Button,
   InputWrap,
   Textarea,
+  ButtonWrap,
+  MainFormWrap,
 } from './InvoicesForm.style';
 
 const InputFieldName = {
@@ -57,71 +59,94 @@ const InvoicesForm = ({ invoice }) => {
     }
   };
 
+  const INV = {
+    number: number,
+    date_created: invoiceDate,
+    date_supplied: supplyDate,
+    comment: comment,
+  };
+
+  const isValidationData = () => {
+    const isNumberValid = number.toString().split('').length >= 3;
+    const isCommentValid = comment.length > 3 && comment.length <= 160;
+    return isNumberValid && invoiceDate && supplyDate && isCommentValid
+      ? true
+      : false;
+  };
+
+  const showMessage = isValidationData()
+    ? ''
+    : 'All fields must be filled. The field "Number" must be at least 3 digits. The "Comment" field contains a minimum of 4 and a maximum of 160 characters.';
+
   const handleSubmit = event => {
     event.preventDefault();
 
-    const INV = {
-      number: number,
-      date_created: invoiceDate,
-      date_supplied: supplyDate,
-      comment: comment,
-    };
+    if (isValidationData()) {
+      if (invoice) {
+        editInvoice(invoice.id, INV);
+      } else {
+        createInvoice(INV);
+      }
 
-    if (invoice) {
-      editInvoice(invoice.id, INV);
-    } else {
-      createInvoice(INV);
-    }
-
-    onGoMainPage();
+      onGoMainPage();
+    } else return;
   };
 
   return (
-    <FormWrap onSubmit={handleSubmit}>
-      <InputWrap>
+    <MainFormWrap>
+      <Form onSubmit={handleSubmit}>
+        <InputWrap>
+          <Label>
+            Number:
+            <Input
+              name={InputFieldName.INV}
+              type="number"
+              value={number}
+              onChange={handleInputChange}
+              placeholder="Enter the number"
+            />
+          </Label>
+
+          <Label>
+            Invoice Date:
+            <Input
+              name={InputFieldName.INV_DATE}
+              type="date"
+              value={invoiceDate}
+              placeholder="Select date"
+              onChange={handleInputChange}
+            />
+          </Label>
+
+          <Label>
+            Supply Date:
+            <Input
+              name={InputFieldName.SUPPLY_DATE}
+              type="date"
+              value={supplyDate}
+              placeholder="Select date"
+              onChange={handleInputChange}
+            />
+          </Label>
+        </InputWrap>
         <Label>
-          Number:
-          <Input
-            name={InputFieldName.INV}
-            type="number"
-            value={number}
+          Comment:
+          <Textarea
+            name={InputFieldName.COMMENT}
+            value={comment}
             onChange={handleInputChange}
-            placeholder="Enter the number"
           />
         </Label>
 
-        <Label>
-          Invoice Date:
-          <Input
-            name={InputFieldName.INV_DATE}
-            type="date"
-            value={invoiceDate}
-            placeholder="Select date"
-            onChange={handleInputChange}
-          />
-        </Label>
+        <ButtonWrap>
+          <p>{showMessage}</p>
 
-        <Label>
-          Supply Date:
-          <Input
-            name={InputFieldName.SUPPLY_DATE}
-            type="date"
-            value={supplyDate}
-            placeholder="Select date"
-            onChange={handleInputChange}
-          />
-        </Label>
-      </InputWrap>
-      <Label>
-        Comment:
-        <Textarea
-          name={InputFieldName.COMMENT}
-          value={comment}
-          onChange={handleInputChange}
-        />
-      </Label>
-      <Button type="submit">Save</Button>
-    </FormWrap>
+          <Button type="submit" disabled={!isValidationData()}>
+            Save
+          </Button>
+        </ButtonWrap>
+      </Form>
+    </MainFormWrap>
   );
 };
 

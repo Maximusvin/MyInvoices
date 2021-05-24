@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-export const FormWrap = styled.form`
+export const MainFormWrap = styled.div`
   padding: 35px 25px;
   border: 1px solid rgba(128, 128, 128, 0.4);
   margin-bottom: 30px;
 `;
+
+export const Form = styled.form``;
 
 export const InputWrap = styled.div`
   display: grid;
@@ -37,13 +39,20 @@ export const Label = styled.label`
   font-weight: 600;
 `;
 
+export const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+`;
+
 export const Button = styled.button`
   display: block;
   padding: 10px 25px;
   border-radius: 5px;
   color: #fff;
   font-weight: 600;
-  background-color: rgb(11, 11, 255);
+  background-color: ${props =>
+    props.disabled ? 'rgb(136, 136, 136)' : 'rgb(11, 11, 255)'};
   cursor: pointer;
-  margin-left: auto;
 `;
